@@ -1,0 +1,46 @@
+<article>
+  <h1>User Profile</h1>
+
+  <section>
+    <h2>User Information</h2>
+
+    <p>Username: {{user?.username}}</p>
+    <p>EMail: {{user?.email}}</p>
+    <p>City: {{user?.city}}</p>
+    <p>Street: {{user?.street}}</p>
+    <p>Street Number: {{user?.streetNumber}}</p>
+  </section>
+
+  <section>
+    <h2>Current Messages</h2>
+
+    <p *ngIf="!user || !user.messages || user.messages.length === 0; else showMessages">
+      You currently do not have any messages.
+    </p>
+    <ng-template #showMessages>
+      <p *ngFor="let message of user?.messages; let i = index">
+        Message Nr. {{i + 1}}: {{message}}
+      </p>
+    </ng-template>
+  </section>
+</article>
+
+<form #userForm="ngForm" (ngSubmit)="onSubmit()">
+  <h1>Edit profile</h1>
+
+  <div>
+    <label for="username">
+      Username:
+      <input id="username" type="text" name="username" [(ngModel)]="model.username" #username="ngModel">
+    </label>
+  </div>
+  <br/>
+  <div>
+    <label for="email">
+      E-Mail:
+      <input id="email" type="text" name="email" [(ngModel)]="model.email" #email="ngModel">
+    </label>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
