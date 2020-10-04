@@ -26,7 +26,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/main.ae8478c32e5fd0d94fe5.js",
+              "src/assets/polyfills.10a6c142eabe96a3c95c.js",
+              "src/assets/runtime.acf0dec4155e77772545.js"
+            ]
           },
           "configurations": {
             "production": {
