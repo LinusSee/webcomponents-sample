@@ -2,7 +2,7 @@
 This will become a sample project on using Angular web components. It is meant to be an exercise and reference project regarding Angular web components.
 <br>
 <br>
-There are several things I want to do or try in this project:
+There are several things/goals I want to do or try in this project:
 1. How to convert an Angular App into a Web Component
 2. Compile a Web Component into a single file (easier to load and include)
 3. Pass inputs to a web component from an Angular app
@@ -24,7 +24,13 @@ It will route between different sites, which include the webcomponents, and have
 TDB
 
 ### user-information-component
-
+This component takes a user and displays it on a profile like site. It also provides a form to change the username and email via an event to the parent component.
+<br>
+These are the goals I want to realize in this component:
+- [x] Goal 3: It takes a user as an input
+- [x] Goal 4: It outputs an event to to the parent component. This event contains a new username and email to "overwrite"/replace the old values
+- [x] Goal 6: It is statically included in the parent component, e.g. via the angular.json file
+- [ ] Goal 9: It includes dummy data to use if the component is used in developement (e.g. via `ng serve`) and not included in another app
 
 ### webcomponent-server
 TDB
