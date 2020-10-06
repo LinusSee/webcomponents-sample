@@ -43,6 +43,7 @@
         ]
       }
     ],
+    "object-literal-sort-keys": null,
     "no-console": [
       true,
       "debug",
@@ -111,6 +112,10 @@
         "allow-pascal-case"
       ]
     },
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
     "whitespace": {
       "options": [
         "check-branch",
