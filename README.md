@@ -41,4 +41,4 @@ These are the goals I want to realize in this component:
 - [x] Goal 9: It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app
 
 ### webcomponent-server
-TDB
+This should be a simple server, e.g. via node.js that servers static files. In this case it will be used to serve the js bundles of webcomponents, so the `main-app` can dynamically load the js bundle when the component is requested.
