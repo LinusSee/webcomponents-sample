@@ -24,8 +24,8 @@ It will route between different sites, which include the webcomponents, and have
 This component takes a list of (servername, endpoint) and displays it. You can delete or add servers to this list. When clicking on a server it displays the logfile (dummy content).
 <br>
 These are the goals I want to realize in this component:
-- [ ] Goal 1: Convert the Angular app to a web component
-- [ ] Goal 3: It takes a ist of (servername, endpoint) as its input
+- [x] Goal 1: Convert the Angular app to a web component
+- [ ] Goal 3: It takes a list of (servername, endpoint) as its input
 - [ ] Goal 4: It outputs events to the parent component (`main-app`) when deleting and when adding a server. The delete event contains the server index, the add event the new servername and endpoint
 - [ ] Goal 7: It is statically included in the parent component, e.g. using the webcomponent server for serving the js bundle
 - [ ] Goal 9: It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app
