@@ -37,7 +37,18 @@ When converting the component to a web component, this will result in an attribu
 In this example I set the value like you would on any other angular component via `[user]="myInputUser"`.
 
 ## Goal 4
-It outputs and event to the parent component (`main-app`). This event contains a new username and email to "overwrite"/replace the old values.
+It outputs an event to the parent component (`main-app`). This event contains a new username and email to "overwrite"/replace the old values.
+<br>
+<br>
+Similarly to the input, all you need to do to be able to create events/outputs is to use the
+`@Output()` annotation and an `EventEmitter`.
+<br>
+For events the name remains the same, e.g. `@Output() userInfoChanged` will become a `userInfoChanged` event.
+<br>
+To use an event, the parent can either query the event and use `setEventListener()` or just
+use the Angular syntax and subscribe like this: `(userInfoChanged)="onChangeUpdateUser($event)"`
+<br>
+The slight different is that `$event` doesn't publish the value, but and object that contains the value in a `detail` attribute. So to be able to use my typeclasses in the subscribing component I used it like this: `(userInfoChanged)="onChangeUpdateUser($event.detail)"`
 
 ## Goal 6
 It is statically included in the parent component, e.g. via the angular.json file.
