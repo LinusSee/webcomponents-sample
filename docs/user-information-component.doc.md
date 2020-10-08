@@ -25,3 +25,22 @@ This will create a web component from our `AppComponent` that can be used with t
 If you want to see you app locally and not only when included in another application see [goal 9](/#Goal-9) for further information.
 
 Note: Prior to Angular 9 the component that will be your web component has to be added to the `NgModule` like this `entryComponents: [UserProfileComponent]`.
+
+## Goal 3
+It takes a user as an input.
+<br>
+<br>
+For the web component to take an input, all you need to do is follow that standard syntax for angular inputs. In other words you annotate a variable, e.g. `user` with `@Input()`.
+<br>
+When converting the component to a web component, this will result in an attribute that you can pass the value to. It will however change the name from kebabCase (e.g. `userInfo`) to dash separation (e.g. `user-info`).
+<br>
+In this example I set the value like you would on any other angular component via `[user]="myInputUser"`.
+
+## Goal 4
+It outputs and event to the parent component (`main-app`). This event contains a new username and email to "overwrite"/replace the old values.
+
+## Goal 6
+It is statically included in the parent component, e.g. via the angular.json file.
+
+## Goal 9
+It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app.
