@@ -52,6 +52,20 @@ The slight different is that `$event` doesn't publish the value, but and object 
 
 ## Goal 6
 It is statically included in the parent component, e.g. via the angular.json file.
+<br>
+<br>
+Static inclusion is pretty easy, at least if you do not have any requirements regarding lazy loading.
+<br>
+I simply compiled the app, without any changed to the build configuration, using `ng build --prod`. This results in several files, including 3 javascript files. I simply copied those to the `main-app`'s `assets` folder and included them in the `angular.json` scripts configuration.
+<br>
+<br>
+That is all you need for it to work. However, keep in mind that this has its drawbacks. First of all, when building you **always** need to build and include the web component at compile time. There is no deciding at runtime, which can be a rather limiting factor.
+<br>
+Also it is included in the app on load by default. No matter how large, the file will be loaded the first time a user gets the page, which might not be desirable, especially with a lot of small or a few large web components.
+<br>
+Lastly, and here I am not entirely sure, as I haven't tried it myself, usually the main-app should provide the polyfills, to prevent duplicate loads where once would suffice. Same goes for the runtime, I do not know if it is required by every web component, or if it is possible to provide once in the main app.
+<br>
+A pointer to look into for this might be [ngx](https://www.npmjs.com/package/ngx-build-plus), so feel free to check it out, I haven't had more than a glance myself for now.
 
 ## Goal 9
 It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app.
