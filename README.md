@@ -33,12 +33,16 @@ These are the goals I want to realize in this component:
 ### user-information-component
 This component takes a user and displays it on a profile like site. It also provides a form to change the username and email via an event to the parent component.
 <br>
+<br>
 These are the goals I want to realize in this component:
 - [x] Goal 1: Convert the Angular app to a web component
 - [x] Goal 3: It takes a user as an input
 - [x] Goal 4: It outputs an event to the parent component (`main-app`). This event contains a new username and email to "overwrite"/replace the old values
 - [x] Goal 6: It is statically included in the parent component, e.g. via the angular.json file
 - [x] Goal 9: It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app
+<br>
+<br>
+For more information on how the goals were implemented see the [docs](../docs/user-information-component.doc.md).
 
 ### webcomponent-server
 This should be a simple server, e.g. via node.js that serves static files. In this case it will be used to serve the js bundles of webcomponents, so the `main-app` can dynamically load the js bundle when the component is requested.
