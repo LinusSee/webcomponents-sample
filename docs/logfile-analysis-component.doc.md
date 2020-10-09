@@ -40,7 +40,7 @@ ng build --prod
 ```
 and it will be compiled into a single file.
 <br>
-And that's it, you have a single file that you can include in your `main-app` to include the web component.
+And that's it, you have a single file that you can include in your `main-app` to include the web component. For more information see [here](https://www.angulararchitects.io/aktuelles/your-options-for-building-angular-elements/).
 
 ## Goal 3
 It takes a list of (servername, endpoint) as its input.
