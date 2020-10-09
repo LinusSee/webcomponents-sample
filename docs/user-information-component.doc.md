@@ -22,7 +22,7 @@ customElements.define('my-app', customAngularElement);
 This will create a web component from our `AppComponent` that can be used with the tag `<my-app></my-app>`
 6. Since we want a user profile however, generate a new component via `ng g component user-profile` and in the `createCustomElement` method replace `AppComponent` with `UserProfileComponent` and change the tag `my-app` to `user-profile`
 
-If you want to see you app locally and not only when included in another application see [goal 9](/#Goal-9) for further information.
+If you want to see you app locally and not only when included in another application see [goal 9](#goal-9) for further information.
 
 Note: Prior to Angular 9 the component that will be your web component has to be added to the `NgModule` like this `entryComponents: [UserProfileComponent]`.
 
@@ -69,3 +69,20 @@ A pointer to look into for this might be [ngx](https://www.npmjs.com/package/ngx
 
 ## Goal 9
 It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app.
+<br>
+<br>
+To be able to use the component in local developement, there are two ways.The first is to add `CUSTOM_ELEMENTS_SCHEMA` to your `AppModule`'s `schemas: []` and simply use it like a web component as described in [goal 1](#goal-1), only you add the `<user-profile></user-profile>` tag to the `app.component.html`.
+<br>
+This means it will be used just the way your `main-app` would use it, which makes for better testing, however the error reporting will be a lot worse, things might just not work without telling you why.
+
+The other way would be to add this block of code to your `ngDoBootstrap()` method.
+```typescript
+if (isDevMode()) {
+  app.bootstrap(AppComponent);
+}
+```
+This bootstraps your `AppComponent` as the root component when not building for production. It is basically the equivalent to having `bootstrap: [AppComponent]` on your `AppModule`, only it will not be there when building the web component for production. After all you only want to include your web component in the `main-app`.
+
+With this you can use the standard Angular `selector`, in this case `app-user-profile` in your `app.component.html`. Using the Angular way obviously means you are not testing if your component works as a web component, however the error reporting will improve, which is pretty helpful during development.
+
+In both ways you can just pass in data like you would into any Angular component. When receiving events you can use the standard syntax in case you used the Angular `selector` or use `(myEvent)=mySubscriber($event.detail)` in case you chose to include it as a web component. The last way is described in [goal 4](#goal-4).
