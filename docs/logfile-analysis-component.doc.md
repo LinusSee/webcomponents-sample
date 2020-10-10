@@ -62,7 +62,7 @@ Similarly to the input, all you need to do to be able to create events/outputs i
 For events the name remains the same, e.g. `@Output() deleteServerAtIndex` will become a `deleteServerAtIndex` event.
 <br>
 To use an event, the parent can either query the element and use `setEventListener()` or just
-use the Angular syntax and subscribe like this: `(deleteServerAtIndex)="ondeleteServerAtIndex($event)"`
+use the Angular syntax and subscribe like this: `(deleteServerAtIndex)="onDeleteServerAtIndex($event)"`
 <br>
 The slight different is that `$event` doesn't publish the value, but and object that contains the value in a `detail` attribute. So to be able to use my typeclasses in the subscribing component I used it like this: `(deleteServerAtIndex)="deleteServerAtIndex($event.detail)"`
 
@@ -136,3 +136,20 @@ As a short summary, we first load our `script` from the server as a `Blob`. We t
 
 ## Goal 9
 It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app.
+<br>
+<br>
+To be able to use the component in local developement, there are two ways. The first is to add `CUSTOM_ELEMENTS_SCHEMA` to your `AppModule`'s `schemas: []` and simply use it like a web component as described in [goal 1](#goal-1), only you add the `<logfile-analysis></logfile-analysis>` tag to the `app.component.html`.
+<br>
+This means it will be used just the way your `main-app` would use it, which makes for better testing, however the error reporting will be a lot worse, things might just not work without telling you why.
+
+The other way would be to add this block of code to your `ngDoBootstrap()` method.
+```typescript
+if (isDevMode()) {
+  app.bootstrap(AppComponent);
+}
+```
+This bootstraps your `AppComponent` as the root component when not building for production. It is basically the equivalent to having `bootstrap: [AppComponent]` on your `AppModule`, only it will not be there when building the web component for production. After all you only want to include your web component in the `main-app`.
+
+With this you can use the standard Angular `selector`, in this case `app-logfile-analysis` in your `app.component.html`. Using the Angular way obviously means you are not testing if your component works as a web component, however the error reporting will improve, which is pretty helpful during development.
+
+In both ways you can just pass in data like you would into any Angular component. When receiving events you can use the standard syntax in case you used the Angular `selector` or use `(myEvent)=mySubscriber($event.detail)` in case you chose to include it as a web component. The last way is described in [goal 4](#goal-4).

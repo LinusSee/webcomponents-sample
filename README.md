@@ -29,7 +29,7 @@ These are the goals I want to realize in this component:
 - [x] Goal 3: It takes a list of (servername, endpoint) as its input
 - [x] Goal 4: It outputs events to the parent component (`main-app`) when deleting and when adding a server. The delete event contains the server index, the add event the new servername and endpoint
 - [x] Goal 7: It is dynamically included in the parent component, e.g. using the webcomponent server for serving the js bundle
-- [ ] Goal 9: It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app
+- [x] Goal 9: It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app
 
 ### user-information-component
 This component takes a user and displays it on a profile like site. It also provides a form to change the username and email via an event to the parent component.

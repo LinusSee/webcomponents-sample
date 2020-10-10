@@ -71,7 +71,7 @@ A pointer to look into for this might be [ngx](https://www.npmjs.com/package/ngx
 It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app.
 <br>
 <br>
-To be able to use the component in local developement, there are two ways.The first is to add `CUSTOM_ELEMENTS_SCHEMA` to your `AppModule`'s `schemas: []` and simply use it like a web component as described in [goal 1](#goal-1), only you add the `<user-profile></user-profile>` tag to the `app.component.html`.
+To be able to use the component in local developement, there are two ways. The first is to add `CUSTOM_ELEMENTS_SCHEMA` to your `AppModule`'s `schemas: []` and simply use it like a web component as described in [goal 1](#goal-1), only you add the `<user-profile></user-profile>` tag to the `app.component.html`.
 <br>
 This means it will be used just the way your `main-app` would use it, which makes for better testing, however the error reporting will be a lot worse, things might just not work without telling you why.
 
