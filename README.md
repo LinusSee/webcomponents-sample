@@ -10,7 +10,7 @@ There are several things/goals I want to do or try in this project:
 5. Define some kind of interface (as code, like an actual interface or class) between the Angular app and the web component
 6. Statically include a web component's js bundle (angular.json, hardcoded in index.html, I will try several options)
 7. Dynamically load a web component's js bundle (from some server/deployment that is independent of the including app)
-8. Is it possible to use Angular routing inside of an Angular web component?
+8. Is it possible to use Angular routing inside of an Angular web component? -> Not in the standard way, see this [medium blogpost](https://medium.com/@timon.grassl/how-to-use-routing-in-angular-web-components-c6a76449cdb) for more
 9. Including dummy data for local developement/`ng serve` (optional)
 
 
