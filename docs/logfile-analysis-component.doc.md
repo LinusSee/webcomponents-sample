@@ -44,6 +44,13 @@ And that's it, you have a single file that you can include in your `main-app` to
 
 ## Goal 3
 It takes a list of (servername, endpoint) as its input.
+<br>
+<br>
+For the web component to take an input, all you need to do is follow that standard syntax for angular inputs. In other words you annotate a variable, e.g. `serverData` with `@Input()`.
+<br>
+When converting the component to a web component, this will result in an attribute that you can pass the value to. It will however change the name from kebabCase (e.g. `serverData`) to dash separation (e.g. `user-info`). This is taken from the Angular docs on Angular elements.
+<br>
+However, for some reason I am still able to set the value like you would on any other angular component via `[serverData]="myInputUser"`. I assume you need the dash separation when accessing the attribute in javascript code like this `myElement.setAttribute('server-data', 'myValue')`, but I have not tested this yet.
 
 ## Goal 4
 It outputs events to the parent component (`main-app`) when deleting and when adding a server. The delete event contains the server index, the add event the new servername and endpoint.

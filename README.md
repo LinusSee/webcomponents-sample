@@ -26,7 +26,7 @@ This component takes a list of (servername, endpoint) and displays it. You can d
 These are the goals I want to realize in this component:
 - [x] Goal 1: Convert the Angular app to a web component
 - [x] Goal 2: Compile the web component into a single file
-- [ ] Goal 3: It takes a list of (servername, endpoint) as its input
+- [x] Goal 3: It takes a list of (servername, endpoint) as its input
 - [ ] Goal 4: It outputs events to the parent component (`main-app`) when deleting and when adding a server. The delete event contains the server index, the add event the new servername and endpoint
 - [x] Goal 7: It is dynamically included in the parent component, e.g. using the webcomponent server for serving the js bundle
 - [ ] Goal 9: It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app
