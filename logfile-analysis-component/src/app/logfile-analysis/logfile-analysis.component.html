@@ -1,8 +1,29 @@
 <ul *ngIf="serverData; else displayUserInfo">
-  <li *ngFor="let server of serverData">
+  <li *ngFor="let server of serverData; let i = index">
     {{server?.servername}}: <a [href]="sanitizeUrl(server?.endpoint)">{{server?.endpoint}}</a>
+    <button type="button" (click)="deleteServer(i)">Delete</button>
   </li>
 </ul>
 <ng-template #displayUserInfo>
   No server data to display.
 </ng-template>
+
+<form #serverForm="ngForm" (ngSubmit)="onSubmit()">
+  <h1>Create Server</h1>
+
+  <div>
+    <label for="servername">
+      Servername:
+      <input id="servername" type="text" name="servername" [(ngModel)]="model.servername" #servername="ngModel">
+    </label>
+  </div>
+  <br/>
+  <div>
+    <label for="endpoint">
+      Endpoint:
+      <input id="endpoint" type="text" name="endpoint" [(ngModel)]="model.endpoint" #endpoint="ngModel">
+    </label>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>

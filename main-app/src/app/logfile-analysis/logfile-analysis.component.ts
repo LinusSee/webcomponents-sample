@@ -33,6 +33,14 @@ export class LogfileAnalysisComponent implements OnInit {
      ];
   }
 
+  public deleteServer(index: number): void {
+     this.serverData.splice(index, 1);
+  }
+
+  public addServer(serverData: ServerDataModel): void {
+     this.serverData.push(serverData);
+  }
+
   private loadScript(): Observable<HTMLScriptElement> {
      const maybeExistingScript: HTMLScriptElement = document.querySelector('script[data-webcomponent-name="logfile-analysis"]');
      const scriptExists = maybeExistingScript !== null;

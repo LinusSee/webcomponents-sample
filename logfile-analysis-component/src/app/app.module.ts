@@ -1,4 +1,5 @@
 import { ApplicationRef, DoBootstrap, Injector, isDevMode, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { createCustomElement } from '@angular/elements';
@@ -13,6 +14,7 @@ import { LogfileAnalysisComponent } from './logfile-analysis/logfile-analysis.co
   ],
   imports: [
     BrowserModule,
+    FormsModule,
   ],
   providers: [],
 })

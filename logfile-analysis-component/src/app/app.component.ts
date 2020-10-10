@@ -19,4 +19,12 @@ export class AppComponent implements OnInit {
          { servername: 'myServer', endpoint: 'localhost:3000/myServer/logfile.log' },
       ];
    }
+
+   public deleteServer(index: number): void {
+      this.serverData.splice(index, 1);
+   }
+
+   public addServer(serverData: ServerDataModel): void {
+      this.serverData.push(serverData);
+   }
 }
