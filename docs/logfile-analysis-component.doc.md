@@ -54,6 +54,19 @@ However, for some reason I am still able to set the value like you would on any 
 
 ## Goal 4
 It outputs events to the parent component (`main-app`) when deleting and when adding a server. The delete event contains the server index, the add event the new servername and endpoint.
+<br>
+<br>
+Similarly to the input, all you need to do to be able to create events/outputs is to use the
+`@Output()` annotation and an `EventEmitter`.
+<br>
+For events the name remains the same, e.g. `@Output() deleteServerAtIndex` will become a `deleteServerAtIndex` event.
+<br>
+To use an event, the parent can either query the element and use `setEventListener()` or just
+use the Angular syntax and subscribe like this: `(deleteServerAtIndex)="ondeleteServerAtIndex($event)"`
+<br>
+The slight different is that `$event` doesn't publish the value, but and object that contains the value in a `detail` attribute. So to be able to use my typeclasses in the subscribing component I used it like this: `(deleteServerAtIndex)="deleteServerAtIndex($event.detail)"`
+
+For the logfile-analysis I added two events, `deleteServerAtIndex` and `addUser`. The parent, in this case the logfile component in the `main-app`, subscribes to them and executes whatever logic it sees fit. Here it either removes the server at the specified index or appends a new server to the end of the array.
 
 ## Goal 7
 It is dynamically included in the parent component, e.g. using the webcomponent server for serving the js bundle.

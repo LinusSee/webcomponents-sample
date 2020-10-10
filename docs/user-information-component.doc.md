@@ -45,7 +45,7 @@ Similarly to the input, all you need to do to be able to create events/outputs i
 <br>
 For events the name remains the same, e.g. `@Output() userInfoChanged` will become a `userInfoChanged` event.
 <br>
-To use an event, the parent can either query the event and use `setEventListener()` or just
+To use an event, the parent can either query the element and use `setEventListener()` or just
 use the Angular syntax and subscribe like this: `(userInfoChanged)="onChangeUpdateUser($event)"`
 <br>
 The slight different is that `$event` doesn't publish the value, but and object that contains the value in a `detail` attribute. So to be able to use my typeclasses in the subscribing component I used it like this: `(userInfoChanged)="onChangeUpdateUser($event.detail)"`
