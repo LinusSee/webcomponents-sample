@@ -50,6 +50,69 @@ It outputs events to the parent component (`main-app`) when deleting and when ad
 
 ## Goal 7
 It is dynamically included in the parent component, e.g. using the webcomponent server for serving the js bundle.
+<br>
+<br>
+This consists of 6 parts:
+1. Follow [goal 2](#goal-2) to build the web component as a single file
+2. Copy the resulting `main.js` file to a server, in my case this is the `web-component-server` which will serve it under `localhost:3000/logfile-analysis/main.js`
+
+The next steps are all in `main-app`. I generated a `logfile.analysis.component` as a wrapper for the web component, so I don't have all the code in the `app.component`:
+3. In your component html you want to add the `logfile-analysis` web component once you finished loading the `script`. For this you can add the following code
+```html
+<div *ngIf="finishedLoadingScript">
+      <logfile-analysis></logfile-analysis>
+</div>
+```
+and to the component itself you need to add the flag `public finishedLoadingScript = false` used in the html
+4. I will load the script as a `Blob`, so once it is loaded we need a method to convert it into a `<script></script>`. You can do this with the following code in your component
+```typescript
+private createScriptElement(blob: Blob): HTMLScriptElement {
+      const scriptElement = document.createElement('script');
+      scriptElement.src = URL.createObjectURL(blob);
+      scriptElement.setAttribute('custom-name', 'someName');
+      return scriptElement;
+}
+```
+5. Now let's actually write the code to load the `script` and use the method just written to make it into a `script` element
+```typescript
+private loadScript(): Observable<HTMLScriptElement> {
+      return this.http.get('http://localhost:3000/logfile-analysis/main.js', { responseType: 'blob' }).pipe(
+         map((blob: Blob) => this.createScriptElement(blob)),
+      );
+}
+```
+This will load it from the server as a `Blob` and then use our method to convert the blob into a `script` element.
+<br>
+There is a bit missing here though. If a user has already visited the page once, then on the revisit, the `script` will be loaded again. This means not only could we be loading our `script` multiple times, it would be incorrect (and throw an exception), since we are defining
+the web component multiple times as well. To resolve this we can modify the code like this
+
+  ```typescript
+  private loadScript(): Observable<HTMLScriptElement> {
+     const maybeExistingScript: HTMLScriptElement = document.querySelector('script[data-webcomponent-name="logfile-analysis"]');
+     const scriptExists = maybeExistingScript !== null;
+
+     const script = scriptExists ?
+                     of(maybeExistingScript) :
+                     this.http.get('http://localhost:3000/logfile-analysis/main.js', { responseType: 'blob' })
+                        .pipe(
+                           map((blob: Blob) => this.createScriptElement(blob)),
+                        );
+     return script;
+  }
+  ```
+
+
+6. Now the last step will be to add this `script` element to the dom and change our flag `finishedLoadingScript` to `true`.
+```typescript
+public ngOnInit(): void {
+      this.loadScript().pipe(
+        tap((script: HTMLScriptElement) => document.body.appendChild(script)),
+        tap(( _ ) => this.finishedLoadingScript = true),
+      ).subscribe();
+}
+```
+
+As a short summary, we first load our `script` from the server as a `Blob`. We then convert this blob into a `<script></script>` and append it to the dom. Once this is done we can set our flag that the script was loaded to `true` and our web component will be displayed.
 
 ## Goal 9
 It includes dummy data to use if the component is used in local developement (e.g. via `ng serve`) and not included in another app.

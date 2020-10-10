@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -17,22 +17,29 @@ export class LogfileAnalysisComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   public ngOnInit(): void {
-    this.loadScript().pipe(
-      tap((script: HTMLScriptElement) => document.body.appendChild(script)),
-      tap(( _ ) => this.finishedLoadingScript = true),
-    ).subscribe();
+     this.loadScript().pipe(
+       tap((script: HTMLScriptElement) => document.body.appendChild(script)),
+       tap(( _ ) => this.finishedLoadingScript = true),
+     ).subscribe();
   }
 
   private loadScript(): Observable<HTMLScriptElement> {
-    return this.http.get('http://localhost:3000/logfile-analysis/main.js', { responseType: 'blob' }).pipe(
-      map((blob: Blob) => this.createScriptElement(blob)),
-    );
+     const maybeExistingScript: HTMLScriptElement = document.querySelector('script[data-webcomponent-name="logfile-analysis"]');
+     const scriptExists = maybeExistingScript !== null;
+
+     const script = scriptExists ?
+                     of(maybeExistingScript) :
+                     this.http.get('http://localhost:3000/logfile-analysis/main.js', { responseType: 'blob' })
+                        .pipe(
+                           map((blob: Blob) => this.createScriptElement(blob)),
+                        );
+     return script;
   }
 
   private createScriptElement(blob: Blob): HTMLScriptElement {
     const scriptElement = document.createElement('script');
     scriptElement.src = URL.createObjectURL(blob);
-    scriptElement.setAttribute('custom-name', 'someName');
+    scriptElement.setAttribute('data-webcomponent-name', 'logfile-analysis');
     return scriptElement;
   }
 }
