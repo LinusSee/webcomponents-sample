@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { ServerDataModel } from '../models/server-data.model';
 
 @Component({
   selector: 'app-logfile-analysis',
@@ -14,6 +15,8 @@ export class LogfileAnalysisComponent implements OnInit {
 
   public finishedLoadingScript = false;
 
+  public serverData: ServerDataModel[];
+
   constructor(private http: HttpClient) { }
 
   public ngOnInit(): void {
@@ -21,6 +24,13 @@ export class LogfileAnalysisComponent implements OnInit {
        tap((script: HTMLScriptElement) => document.body.appendChild(script)),
        tap(( _ ) => this.finishedLoadingScript = true),
      ).subscribe();
+
+     this.serverData = [
+        { servername: 'localhost', endpoint: 'localhost:3000/localhost/logfile.log' },
+        { servername: 'remote', endpoint: 'localhost:3000/remote/logfile.log' },
+        { servername: 'backend', endpoint: 'localhost:3000/backend/logfile.log' },
+        { servername: 'myServer', endpoint: 'localhost:3000/myServer/logfile.log' },
+     ];
   }
 
   private loadScript(): Observable<HTMLScriptElement> {

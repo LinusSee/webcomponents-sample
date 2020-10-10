@@ -1,1 +1,8 @@
-<p>logfile-analysis works!</p>
+<ul *ngIf="serverData; else displayUserInfo">
+  <li *ngFor="let server of serverData">
+    {{server?.servername}}: <a [href]="sanitizeUrl(server?.endpoint)">{{server?.endpoint}}</a>
+  </li>
+</ul>
+<ng-template #displayUserInfo>
+  No server data to display.
+</ng-template>

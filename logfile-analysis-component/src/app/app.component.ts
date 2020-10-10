@@ -1,10 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { ServerDataModel } from './models/server-data.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'logfile-analysis-component';
+export class AppComponent implements OnInit {
+
+   public serverData: ServerDataModel[];
+
+   public ngOnInit(): void {
+      this.serverData = [
+         { servername: 'localhost', endpoint: 'localhost:3000/localhost/logfile.log' },
+         { servername: 'remote', endpoint: 'localhost:3000/remote/logfile.log' },
+         { servername: 'backend', endpoint: 'localhost:3000/backend/logfile.log' },
+         { servername: 'myServer', endpoint: 'localhost:3000/myServer/logfile.log' },
+      ];
+   }
 }
